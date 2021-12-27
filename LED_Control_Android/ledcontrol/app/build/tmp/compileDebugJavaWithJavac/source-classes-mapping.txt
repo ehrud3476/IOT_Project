@@ -1,0 +1,7 @@
+com/example/ledcontrol/BuildConfig.java
+ com.example.ledcontrol.BuildConfig
+com/example/ledcontrol/MainActivity.java
+ com.example.ledcontrol.MainActivity
+ com.example.ledcontrol.MainActivity$1
+ com.example.ledcontrol.MainActivity$2
+ com.example.ledcontrol.MainActivity$3

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "563179274993",
+    "firebase_url": "https://fb-control-57db2-default-rtdb.firebaseio.com",
+    "project_id": "fb-control-57db2",
+    "storage_bucket": "fb-control-57db2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563179274993:android:b765b4de97fb3212221f50",
+        "android_client_info": {
+          "package_name": "com.example.ledcontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563179274993-nohu7iqpa22eren6o32s6g6kaleahstm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ledcontrol",
+            "certificate_hash": "fbec2bf54cc9626c1e9c06faa9a59905414c940b"
+          }
+        },
+        {
+          "client_id": "563179274993-vq1n2jrjcq73rnftb2u9nchinefi5ier.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAB9o6vGP4kMdl4I9eaOngyr3vpjcL2ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563179274993-vq1n2jrjcq73rnftb2u9nchinefi5ier.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
