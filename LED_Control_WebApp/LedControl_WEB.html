@@ -1,0 +1,109 @@
+<html>
+<head>
+  <style>
+  .on-button {
+    background-color: #F3E040;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  </style>                                          <!--화면에 보여지는  버튼의 스타일 지정-->
+  <style>
+  .off-button {
+    background-color: #423B3B;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+</style>
+</head>
+  <body>
+      
+      
+      
+      
+      <div>
+        <h2>LED Remote Controller</h2> <!--최상단에 나타날 문자열-->
+        <h1 id="OUT_TEXT"></h1> <!-- Led 의 현재 상태를 나타내는 문자열 -->
+      <button class="on-button" id = "onBtn"  >LED ON</button> <!--Led를 켤 수 있는 버튼 태그-->
+      <button class="off-button" id = "offBtn">LED OFF</button> <!--Led를 끌 수 있는 버튼 태그-->
+      </div>
+      <div style ="padding:60px;">
+    <img src = "offImg.png" id = "Img"> <!-- Led의 상태를 나타내는 전구 이미지 영역 -->
+  </div>
+      <script type="module">  // 웹과 Firebase를 연결하기 위한 코드 스크립트 타입을 모듈로 설정
+     
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js";
+        import { getDatabase, ref, set, get, onValue, child} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js";
+        
+        const firebaseConfig = { //파이어베이스에서 만든 프로젝트의 정보가 담겨있는 코드
+          apiKey: "AIzaSyD13788H2V-SBEqV3riSqvJSuKhLy-fgYs",
+          authDomain: "fb-control-57db2.firebaseapp.com",
+          databaseURL:"https://fb-control-57db2-default-rtdb.firebaseio.com/",
+          projectId: "fb-control-57db2",
+          storageBucket: "fb-control-57db2.appspot.com",
+          messagingSenderId: "563179274993",
+          appId: "1:563179274993:web:f11ec02a1c06837b221f50",
+          measurementId: "G-JYFX0781B5"
+
+          
+        };
+      
+        //파이어베이스 연결설정과 연결을 위한 객체 선언
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);        
+        
+        var OnButton = document.getElementById("onBtn"); // Led on 버튼을 클릭 할 시 작동하는 Event Handler
+        OnButton.addEventListener("click", onBtnClick, false);
+
+        var OffButton = document.getElementById("offBtn");//Led Off 버튼을 클릭 할 시 작동하는 Event Handler
+        OffButton.addEventListener("click", offBtnClick, false);
+
+        function offImg(){ //전구의 꺼짐상태를 연출 할 이미지를 불러오는 함수를 선언
+          document.getElementById("Img").src = "offImg.png";
+        }
+        function onImg(){ // 전구의 켜짐상태를 연출 할 이미지를 불러오는 함수를 선언
+          document.getElementById("Img").src = "onImg.png";
+        }
+      
+        function onBtnClick(event) { //Led on 버튼을 클릭 할 시 작동하는 함수
+          set(ref(db, 'LED_STATUS'), 'ON'); //파이어베이스에 있는 데이터베이스의 LED_STATUS의 값을 ON으로 설정          
+        }
+                                                       
+        function offBtnClick() { //Led off 버튼을 클릭 할 시 작동하는 함수
+          set(ref(db, 'LED_STATUS'), 'OFF'); //파이어베이스에 있는 데이터베이스의 LED_STATUS의 값을 OFF로 설정     
+          
+        }
+
+        const dbRef = ref(db, 'LED_STATUS');
+        onValue(dbRef, (snapshot) => {            
+            OUT_TEXT.innerText = 'LED STATUS :' + snapshot.val(); //OUT.TEXT에 현재 DB가 가지고 있는 값을 넣어주는 코드
+            if (snapshot.val() == 'ON'){      //조건문을 이용하여 DB의 값이 on 이면 onImg, 즉 전구의 켜짐상태를 연출 하는 함수를 실행하고        
+              onImg();                        //OUT_TEXT의 색상을 노란색으로 설정
+              document.getElementById("OUT_TEXT").style.color ="#F3E040";
+            }else{                             //DB의 값이 on이 아니면 offImg, 즉 전구의 꺼짐상태를 연출 하는 함수를 실행하고 , OUT_TEXT의 색을  회색으로 설정
+              document.getElementById("OUT_TEXT").style.color ="#423B3B";
+            offImg();
+            }
+           
+        })
+        
+      </script>
+      
+    </body>
+</html>
